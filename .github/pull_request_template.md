@@ -1,28 +1,56 @@
-## Summary
-
-<!-- What does this change do, and why? Link any related issue, e.g. "Closes #123". -->
-
-## Type of change
+# Pull Request
 
 <!-- The PR title must follow Conventional Commits, e.g. "fix(catalog): handle empty search results". -->
 
-- [ ] `feat`: new feature
-- [ ] `fix`: bug fix
-- [ ] `docs`: documentation only
-- [ ] `chore` / `ci` / `build`: tooling, dependencies or pipeline
-- [ ] `refactor` / `perf` / `test`: no behaviour change for users
+## Summary
 
-## Components affected
+What does this change do and why?
 
-<!-- e.g. ui, catalog, cart, orders, checkout, terraform, Helm charts, docs -->
+## Type of Change
 
-## How was this tested?
+- [ ] Feature
+- [ ] Bug fix
+- [ ] Documentation
+- [ ] CI/CD
+- [ ] Security
+- [ ] Infrastructure-related
+- [ ] Dependency update
 
-<!-- Commands run and results, e.g. `yarn nx test ui`, `yarn compose:up` and manual checks at http://localhost:8888 -->
+## Validation
+
+- [ ] Unit tests pass
+- [ ] Integration tests pass where applicable
+- [ ] Application builds successfully
+- [ ] Container image builds successfully
+- [ ] Local application flow tested where applicable
+
+## Security Impact
+
+Does this affect:
+
+- [ ] Authentication
+- [ ] Authorization
+- [ ] Secrets
+- [ ] Dependencies
+- [ ] Container images
+- [ ] CI/CD
+- [ ] No security impact
+
+## Deployment Impact
+
+- [ ] Application deployment
+- [ ] Database migration
+- [ ] Infrastructure change
+- [ ] Configuration change
+- [ ] No deployment impact
+
+## Rollback Plan
+
+Describe how this change can be reverted safely.
 
 ## Checklist
 
-- [ ] Tests pass locally for the affected components
-- [ ] Code is formatted (pre-commit hooks pass)
-- [ ] Documentation updated where needed
-- [ ] No secrets or credentials are included
+- [ ] No secrets committed
+- [ ] Documentation updated where necessary
+- [ ] Tests added or updated where necessary
+- [ ] Change is appropriately scoped
