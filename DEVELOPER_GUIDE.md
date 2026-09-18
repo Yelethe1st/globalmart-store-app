@@ -82,20 +82,28 @@ Note: For ECR you must have created the repositories for the images you are tryi
 
 Each component has its own Docker Compose file along side its source code. For example `src/ui/docker-compose.yml`. These are set up to build the image locally before running the compose file.
 
-You can run a single component with its dependencies like so:
+You can run a single component with its dependencies from its source directory like so:
 
 ```
-yarn nx compose:up catalog
+cd src/catalog
+DB_PASSWORD='<some password>' docker compose up --build --detach --wait
 ```
 
-If you want to run all the application components from your local repository you can run this command:
+The `ui` component also has an nx target for this: `yarn nx compose:up ui`.
+
+If you want to run all the application components from your local repository you can run this command from the root:
 
 ```
-yarn nx compose-app:up
+export DB_PASSWORD='<some password>'
+yarn compose:up
 ```
+
+This runs `docker compose --project-directory src/app up --build --detach --wait`, which uses `src/app/docker-compose.yml` to include the compose file of every component. The store front will be available at `http://localhost:8888`.
+
+Note: `DB_PASSWORD` must be set in your shell or in `src/app/.env`. A `.env` file in the repository root is not read because the project directory is `src/app`.
 
 Then this to tear it down:
 
 ```
-yarn nx compose-app:down
+yarn compose:down
 ```
