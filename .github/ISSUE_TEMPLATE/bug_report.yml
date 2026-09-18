@@ -1,0 +1,55 @@
+name: Bug report
+description: Report something that is not working as expected
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - ui
+        - catalog
+        - cart
+        - orders
+        - checkout
+        - recommendations
+        - load-generator
+        - Infrastructure (Terraform / Helm)
+        - Local development (Docker Compose / nx)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `yarn compose:up`
+        2. Open http://localhost:8888
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: e.g. 1.6.2 or a commit SHA
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: How you are running the application (Docker Compose, Kubernetes, EKS, ECS), OS and CPU architecture.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste any relevant log output. Remove secrets before posting.
+      render: shell
