@@ -91,16 +91,23 @@ DB_PASSWORD='<some password>' docker compose up --build --detach --wait
 
 The `ui` component also has an nx target for this: `yarn nx compose:up ui`.
 
-If you want to run all the application components from your local repository you can run this command from the root:
+If you want to run all the application components from your local repository, first create a `.env` file in the repository root (it is ignored by git):
 
 ```
-export DB_PASSWORD='<some password>'
+echo "DB_PASSWORD='<some password>'" > .env
+```
+
+Then run this command from the root:
+
+```
 yarn compose:up
 ```
 
-This runs `docker compose --project-directory src/app up --build --detach --wait`, which uses `src/app/docker-compose.yml` to include the compose file of every component. The store front will be available at `http://localhost:8888`.
+This runs `docker compose --project-directory src/app --env-file .env up --build --detach --wait --wait-timeout 300`, which uses `src/app/docker-compose.yml` to include the compose file of every component and reads variables from the root `.env` file. The command fails if `.env` does not exist. The store front will be available at `http://localhost:8888`.
 
-Note: `DB_PASSWORD` must be set in your shell or in `src/app/.env`. A `.env` file in the repository root is not read because the project directory is `src/app`.
+The first start can take several minutes. OpenSearch alone can take close to two minutes to become healthy on a fresh volume, and the `catalog` and `ui` containers only start once it is healthy. For this reason its healthcheck has a `start_period` of 180 seconds, and the script waits up to 300 seconds for the whole stack.
+
+If the command times out, some containers may be left in the `Created` state and the store front will not load. Check with `docker compose --project-directory src/app ps -a`, then run `yarn compose:up` again to start the remaining containers.
 
 Then this to tear it down:
 

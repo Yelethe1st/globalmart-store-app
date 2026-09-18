@@ -7,8 +7,8 @@
   "private": true,
   "nx": {},
   "scripts": {
-    "compose:up": "docker compose --project-directory src/app up --build --detach --wait --wait-timeout 120",
-    "compose:down": "docker compose --project-directory src/app down",
+    "compose:up": "docker compose --project-directory src/app --env-file .env up --build --detach --wait --wait-timeout 300",
+    "compose:down": "docker compose --project-directory src/app --env-file .env down",
     "prepare": "lefthook install"
   },
   "workspaces": [
